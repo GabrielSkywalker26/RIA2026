@@ -50,7 +50,7 @@ cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
 - `/` — inicio
 - `/fotos` — fotos aleatorias de perros
 - `/razas` — selector de razas y botón Next
-- `/explorar` — redirige a `/fotos`
+- `/aboutus` — información sobre el proyecto
 
 ## Requisitos del laboratorio (estado base)
 

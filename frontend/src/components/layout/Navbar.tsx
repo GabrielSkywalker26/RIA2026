@@ -27,7 +27,9 @@ export function Navbar() {
               <Nav.Link as={NavLink} to="/razas">
                 Ver Razas
               </Nav.Link>
-              <Nav.Link href="#sobre-nosotros">Sobre Nosotros</Nav.Link>
+              <Nav.Link as={NavLink} to="/aboutus">
+                Sobre Nosotros
+              </Nav.Link>
             </Nav>
           </BSNavbar.Collapse>
         </Container>

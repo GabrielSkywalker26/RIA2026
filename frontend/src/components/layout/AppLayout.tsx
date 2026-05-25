@@ -11,7 +11,7 @@ export function AppLayout() {
           <Outlet />
         </Container>
       </main>
-      <footer id="sobre-nosotros" className="site-footer">
+      <footer className="site-footer">
         <Container>
           <strong>BuscaPerros</strong>
           <p>RIA 2026 - UTU ESI Buceo</p>
