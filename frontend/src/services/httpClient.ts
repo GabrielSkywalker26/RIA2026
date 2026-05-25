@@ -1,5 +1,5 @@
 const apiBaseUrl = (
-  import.meta.env.VITE_API_BASE_URL ?? 'https://jsonplaceholder.typicode.com'
+  import.meta.env.VITE_API_BASE_URL ?? 'https://dog.ceo/api'
 ).replace(/\/$/, '')
 
 export { apiBaseUrl }

@@ -7,12 +7,15 @@ export function AppLayout() {
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
       <main className="flex-grow-1">
-        <Container className="py-4">
+        <Container className="py-5">
           <Outlet />
         </Container>
       </main>
-      <footer className="py-3 text-center text-muted small border-top">
-        RIA 2026 — UTU ESI Buceo
+      <footer id="sobre-nosotros" className="site-footer">
+        <Container>
+          <strong>BuscaPerros</strong>
+          <p>RIA 2026 - UTU ESI Buceo</p>
+        </Container>
       </footer>
     </div>
   )

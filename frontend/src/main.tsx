@@ -1,12 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import favicon from './assets/favicon.png'
 import { AppLayout } from './components/layout/AppLayout'
 import './index.css'
-import { ExplorePage } from './pages/ExplorePage'
+import { BreedsPage } from './pages/BreedsPage'
 import { HomePage } from './pages/HomePage'
+import { PhotosPage } from './pages/PhotosPage'
 
 const link = document.createElement('link')
 link.rel = 'icon'
@@ -20,7 +21,9 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: 'explorar', element: <ExplorePage /> },
+      { path: 'fotos', element: <PhotosPage /> },
+      { path: 'razas', element: <BreedsPage /> },
+      { path: 'explorar', element: <Navigate to="/fotos" replace /> },
     ],
   },
 ])

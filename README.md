@@ -17,7 +17,7 @@ Un solo entorno de desarrollo (Vite en el puerto 5173):
 
 - `.env.example` — plantilla versionada (copiar si hace falta).
 - `.env` — opcional, local, **no se sube a Git** (está en `.gitignore`).
-- Si no creás `.env`, Docker usa `https://jsonplaceholder.typicode.com` por defecto.
+- Si no creás `.env`, Docker usa `https://dog.ceo/api` por defecto.
 
 ```bash
 cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
@@ -40,7 +40,7 @@ cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
         ├── pages/                 # HomePage, ExplorePage
         ├── services/
         │   ├── httpClient.ts      # fetch a la API configurada
-        │   └── api.ts             # endpoints (placeholder hasta elegir tema)
+        │   └── api.ts             # endpoints de Dog CEO
         ├── main.tsx               # entrada, rutas y favicon
         └── index.css
 ```
@@ -48,14 +48,16 @@ cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
 ## Rutas
 
 - `/` — inicio
-- `/explorar` — demo de consumo de API (JSONPlaceholder; reemplazar al elegir tema)
+- `/fotos` — fotos aleatorias de perros
+- `/razas` — selector de razas y botón Next
+- `/explorar` — redirige a `/fotos`
 
 ## Requisitos del laboratorio (estado base)
 
 - React + Bootstrap
 - Mínimo 2 rutas
-- API pública (placeholder)
-- Pendiente según el grupo: tema definitivo, LocalStorage si aplica, documentación de entrega
+- API pública Dog CEO
+- Pendiente según el grupo: LocalStorage si aplica, documentación de entrega
 
 ## Entrega
 
