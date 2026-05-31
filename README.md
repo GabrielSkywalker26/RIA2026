@@ -1,70 +1,59 @@
-# RIA 2026 — Tarea 2
+# Trabajo Práctico: Aplicación RIA (Rich Internet Application)
 
-Aplicación RIA para Rich Internet Applications (UTU, ESI Buceo, 2026). Consume APIs públicas según el tema del grupo; sin backend propio ni base de datos (solo LocalStorage si hace falta).
+## 1. Objetivo y Alcance
+El objetivo de este proyecto es desarrollar una aplicación web funcional del tipo RIA (Rich Internet Application) utilizando **React** que consuma APIs públicas de forma asíncrona. Se aplica un ciclo de desarrollo profesional que abarca desde la concepción del diseño visual (Mockups de alta fidelidad en Figma) hasta la documentación, testing automatizado y optimización de rendimiento.
 
-**Stack:** React, TypeScript, Vite, Bootstrap, Docker.
+### Requerimientos del Proyecto Cumplidos:
+* **Framework:** Desarrollo basado en componentes utilizando **React**.
+* **Interfaz de Usuario (UI):** Diseño e implementación utilizando [Bootstrap / Material Design]* (elegí el tuyo y borrá el otro) para garantizar consistencia visual y responsividad.
+* **Navegación:** Implementación de enrutamiento en el cliente con un mínimo de 2 rutas/páginas diferenciadas mediante **React Router**.
+* **Arquitectura de Datos:** Consumo exclusivo de APIs públicas y manejo de persistencia ligera del lado del cliente mediante `LocalStorage`. Sin backend ni base de datos propia.
 
-## Cómo levantar la app
+---
 
-Un solo entorno de desarrollo (Vite en el puerto 5173):
+## 2. Herramientas y Tecnologías Utilizadas
 
-- `docker compose up --build` → [http://localhost:5173](http://localhost:5173)
-- Segundo plano: `docker compose up --build -d`
-- Frenar: `docker compose down`
-- Rebuild limpio: `docker compose build --no-cache` y después `docker compose up`
+En cumplimiento con los requerimientos de la letra, se detallan las herramientas utilizadas en el ciclo de desarrollo:
 
-## Variables de entorno
+* **Diseño de UI (Mockups):** [Figma](https://www.figma.com/) (Diseño estático de alta fidelidad y exportación de assets).
+* **Library Frontend:** React.
+* **Estilos y UI:** Bootstrap
+* **Enrutamiento:** React Router.
+* **Consumo de APIs:** Fetch API para la comunicación asíncrona con servicios externos.
+* **Entorno de Desarrollo:** Vite como entorno de ejecución local.
+* **APIs Públicas Consumidas:**
+    * [Dog API (dog.ceo)](https://dog.ceo/dog-api/) - Para la obtención de imágenes aleatorias y filtrado por razas.
+    * [The Dog API](https://thedogapi.com/) - Para datos detallados e información de las razas.
 
-- `.env.example` — plantilla versionada (copiar si hace falta).
-- `.env` — opcional, local, **no se sube a Git** (está en `.gitignore`).
-- Si no creás `.env`, Docker usa `https://dog.ceo/api` por defecto.
+---
 
-```bash
-cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
-```
+## 3. Calidad de Software y Testing
 
-## Estructura del repo
+Para garantizar el cumplimiento de los estándares de una aplicación RIA profesional, el proyecto implementa una estrategia de pruebas en múltiples niveles y una auditoría estricta de rendimiento:
 
-```
-.
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-├── README.md
-└── frontend/
-    ├── Dockerfile          # Vite dev (único contenedor)
-    ├── package.json
-    └── src/
-        ├── assets/favicon.png
-        ├── components/layout/   # AppLayout, Navbar
-        ├── pages/                 # HomePage, ExplorePage
-        ├── services/
-        │   ├── httpClient.ts      # fetch a la API configurada
-        │   └── api.ts             # endpoints de Dog CEO
-        ├── main.tsx               # entrada, rutas y favicon
-        └── index.css
-```
+### 🔹 Pruebas Unitarias (Unit Tests)
+* **Objetivo:** Verificar el correcto funcionamiento de los componentes de React aislados y las funciones de utilidad de forma individual.
+* **Herramientas:** [Jest / Vitest]* junto con **React Testing Library**.
+* **Alcance:** Pruebas sobre el renderizado correcto de componentes, manejo de estados internos y eventos básicos (clicks, cambios en inputs).
 
-## Rutas
+### 🔹 Pruebas de Integración (Integration Tests)
+* **Objetivo:** Validar la interacción fluida entre múltiples componentes, el flujo de navegación entre las distintas rutas y el comportamiento de la app al consumir las APIs simuladas (mocked).
+* **Herramientas:** Playwright.
+* **Alcance:** Simulación de flujos de usuario completos (ej: buscar una raza de perro, esperar la respuesta de la API, renderizar la imagen y navegar a la sección de detalles).
 
-- `/` — inicio
-- `/fotos` — fotos aleatorias de perros
-- `/razas` — selector de razas y botón Next
-- `/aboutus` — información sobre el proyecto
+### ⚡ Auditoría de Rendimiento y UX (Lighthouse > 80)
+La aplicación fue optimizada siguiendo las buenas prácticas de desarrollo web para superar un **puntaje mayor a 80** en todas las métricas clave de Google Lighthouse:
 
-## Requisitos del laboratorio (estado base)
+* **Performance (Rendimiento):** Optimización de carga de imágenes externas de perros (uso de atributos de tamaño adaptables y carga perezosa o *lazy loading*).
+* **Accessibility (Accesibilidad):** Uso de HTML semántico, etiquetas `alt` descriptivas en las imágenes dinámicas devueltas por la API y contraste de color adecuado mediante las clases del framework de UI.
+* **Best Practices (Buenas Prácticas):** Uso de conexiones seguras (HTTPS) para el consumo de las APIs y código libre de errores en la consola.
+* **SEO:** Configuración correcta de meta-etiquetas y estructura de encabezados para asegurar la indexación básica.
 
-- React + Bootstrap
-- Mínimo 2 rutas
-- API pública Dog CEO
-- Pendiente según el grupo: LocalStorage si aplica, documentación de entrega
+---
 
-## Entrega
+## 4. Instalación y Ejecución Local
 
-Pre-entrega: 1 de junio de 2026. Prórroga posible: 15 de junio.
+Para clonar y ejecutar esta aplicación en tu entorno local, seguí estos pasos:
 
-## Primer commit
-
-Incluir: `frontend/`, `docker-compose.yml`, `.env.example`, `.gitignore`, `README.md`.
-
-No incluir: `.env`, `node_modules/`, `frontend/dist/`.
+### Prerrequisitos
+Tener instalado [Node.js](https://nodejs.org/) y un gestor de paquetes (npm).
