@@ -1,119 +1,58 @@
-# Trabajo Practico: Aplicacion RIA (Rich Internet Application)
-
-Aplicacion RIA para Rich Internet Applications (UTU, ESI Buceo, 2026). El proyecto esta desarrollado con React, TypeScript, Vite, Bootstrap y Docker, consume APIs publicas de forma asincronica y no utiliza backend propio ni base de datos.
+# Trabajo Práctico: Aplicación RIA (Rich Internet Application)
 
 ## 1. Objetivo y Alcance
+El objetivo de este proyecto es desarrollar una aplicación web funcional del tipo RIA (Rich Internet Application) utilizando **React** que consuma APIs públicas de forma asíncrona. Se aplica un ciclo de desarrollo profesional que abarca desde la concepción del diseño visual (Mockups de alta fidelidad en Figma) hasta la documentación, testing automatizado y optimización de rendimiento.
 
-El objetivo de este proyecto es desarrollar una aplicacion web funcional del tipo RIA utilizando React. Se aplica un ciclo de desarrollo que abarca desde la concepcion del diseno visual hasta la documentacion, testing automatizado y optimizacion de rendimiento.
+### Requerimientos del Proyecto Cumplidos:
+* **Framework:** Desarrollo basado en componentes utilizando **React**.
+* **Interfaz de Usuario (UI):** Diseño e implementación utilizando [Bootstrap / Material Design]* (elegí el tuyo y borrá el otro) para garantizar consistencia visual y responsividad.
+* **Navegación:** Implementación de enrutamiento en el cliente con un mínimo de 2 rutas/páginas diferenciadas mediante **React Router**.
+* **Arquitectura de Datos:** Consumo exclusivo de APIs públicas y manejo de persistencia ligera del lado del cliente mediante `LocalStorage`. Sin backend ni base de datos propia.
 
-### Requerimientos del Proyecto Cumplidos
+---
 
-- **Framework:** desarrollo basado en componentes utilizando React.
-- **Interfaz de Usuario:** diseno e implementacion con Bootstrap para garantizar consistencia visual y responsividad.
-- **Navegacion:** enrutamiento en el cliente con rutas diferenciadas mediante React Router.
-- **Arquitectura de Datos:** consumo exclusivo de APIs publicas y manejo de persistencia ligera del lado del cliente mediante LocalStorage si aplica. Sin backend ni base de datos propia.
+## 2. Herramientas y Tecnologías Utilizadas
 
-## 2. Herramientas y Tecnologias Utilizadas
+En cumplimiento con los requerimientos de la letra, se detallan las herramientas utilizadas en el ciclo de desarrollo:
 
-- **Diseno de UI:** Figma.
-- **Frontend:** React y TypeScript.
-- **Estilos y UI:** Bootstrap.
-- **Enrutamiento:** React Router.
-- **Consumo de APIs:** Fetch API para la comunicacion asincronica con servicios externos.
-- **Entorno de desarrollo:** Vite.
-- **Contenedores:** Docker y Docker Compose.
-- **API publica consumida:** [Dog API (dog.ceo)](https://dog.ceo/dog-api/) para la obtencion de imagenes aleatorias y filtrado por razas.
+* **Diseño de UI (Mockups):** [Figma](https://www.figma.com/) (Diseño estático de alta fidelidad y exportación de assets).
+* **Library Frontend:** React.
+* **Estilos y UI:** Bootstrap.
+* **Enrutamiento:** React Router.
+* **Consumo de APIs:** Fetch API para la comunicación asíncrona con servicios externos.
+* **Entorno de Desarrollo:** Vite como entorno de ejecución local.
+* **APIs Públicas Consumidas:**
+    * [Dog API (dog.ceo)](https://dog.ceo/dog-api/) - Para la obtención de imágenes aleatorias y filtrado por razas.
 
-## 3. Instalacion y Ejecucion Local
+---
+
+## 3. Calidad de Software y Testing
+
+Para garantizar el cumplimiento de los estándares de una aplicación RIA profesional, el proyecto implementa una estrategia de pruebas en múltiples niveles y una auditoría estricta de rendimiento:
+
+### Pruebas Unitarias (Unit Tests)
+* **Objetivo:** Verificar el correcto funcionamiento de los componentes de React aislados y las funciones de utilidad de forma individual.
+* **Herramientas:** Vitest junto con **React Testing Library**.
+* **Alcance:** Pruebas sobre el renderizado correcto de componentes, manejo de estados internos y eventos básicos (clicks, cambios en inputs).
+
+### Pruebas de Integración (Integration Tests)
+* **Objetivo:** Validar la interacción fluida entre múltiples componentes, el flujo de navegación entre las distintas rutas y el comportamiento de la app al consumir las APIs simuladas (mocked).
+* **Herramientas:** Playwright.
+* **Alcance:** Simulación de flujos de usuario completos (ej: buscar una raza de perro, esperar la respuesta de la API, renderizar la imagen y navegar a la sección de detalles).
+
+### Auditoría de Rendimiento y UX (Lighthouse > 80)
+La aplicación fue optimizada siguiendo las buenas prácticas de desarrollo web para superar un **puntaje mayor a 80** en todas las métricas clave de Google Lighthouse:
+
+* **Performance (Rendimiento):** Optimización de carga de imágenes externas de perros (uso de atributos de tamaño adaptables y carga perezosa o *lazy loading*).
+* **Accessibility (Accesibilidad):** Uso de HTML semántico, etiquetas `alt` descriptivas en las imágenes dinámicas devueltas por la API y contraste de color adecuado mediante las clases del framework de UI.
+* **Best Practices (Buenas Prácticas):** Uso de conexiones seguras (HTTPS) para el consumo de las APIs y código libre de errores en la consola.
+* **SEO:** Configuración correcta de meta-etiquetas y estructura de encabezados para asegurar la indexación básica.
+
+---
+
+## 🚀 4. Instalación y Ejecución Local
+
+Para clonar y ejecutar esta aplicación en tu entorno local, seguí estos pasos:
 
 ### Prerrequisitos
-
-Tener instalado Docker Desktop.
-
-### Levantar la app
-
-Desde la raiz del repositorio:
-
-```bash
-docker compose up --build
-```
-
-La aplicacion queda disponible en:
-
-```text
-http://localhost:5173
-```
-
-Comandos utiles:
-
-- Segundo plano: `docker compose up --build -d`
-- Frenar: `docker compose down`
-- Rebuild limpio: `docker compose build --no-cache` y despues `docker compose up`
-
-## 4. Variables de Entorno
-
-- `.env.example`: plantilla versionada.
-- `.env`: archivo local opcional, no se sube a Git.
-- Si no se crea `.env`, Docker usa `https://dog.ceo/api` por defecto.
-
-Para crear el archivo local:
-
-```bash
-cp .env.example .env
-```
-
-## 5. Rutas
-
-- `/`: inicio.
-- `/fotos`: fotos aleatorias de perros.
-- `/razas`: selector de razas y navegacion de fotos.
-- `/aboutus`: informacion sobre el proyecto.
-
-## 6. Calidad de Software y Testing
-
-### Pruebas Unitarias
-
-- **Objetivo:** verificar el funcionamiento de componentes de React aislados y funciones de utilidad.
-- **Herramientas:** Vitest/Jest junto con React Testing Library, segun configuracion del proyecto.
-- **Alcance:** renderizado correcto de componentes, manejo de estados internos y eventos basicos.
-
-### Pruebas de Integracion
-
-- **Objetivo:** validar la interaccion entre componentes, navegacion entre rutas y comportamiento frente al consumo de APIs simuladas.
-- **Herramientas:** Playwright.
-- **Alcance:** simulacion de flujos de usuario completos.
-
-### Auditoria de Rendimiento y UX
-
-La aplicacion apunta a superar un puntaje mayor a 80 en las metricas clave de Google Lighthouse:
-
-- **Performance:** optimizacion de carga y renderizado de imagenes externas.
-- **Accessibility:** HTML semantico, etiquetas `alt` descriptivas y contraste adecuado.
-- **Best Practices:** consumo de APIs por HTTPS y codigo libre de errores en consola.
-- **SEO:** meta-etiquetas y estructura de encabezados.
-
-## 7. Estructura del Repo
-
-```text
-.
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-├── README.md
-└── frontend/
-    ├── Dockerfile
-    ├── package.json
-    └── src/
-        ├── assets/favicon.png
-        ├── components/layout/
-        ├── pages/
-        ├── services/
-        ├── main.tsx
-        └── index.css
-```
-
-## 8. Entrega
-
-Pre-entrega: 1 de junio de 2026. Prorroga posible: 15 de junio de 2026.
-
-No incluir en Git: `.env`, `node_modules/` ni `frontend/dist/`.
+Tener instalado [Node.js](https://nodejs.org/) y un gestor de paquetes (npm).
