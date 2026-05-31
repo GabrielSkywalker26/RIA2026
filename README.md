@@ -54,17 +54,4 @@ cp .env.example .env   # solo si van a cambiar VITE_API_BASE_URL
 
 ## Requisitos del laboratorio (estado base)
 
-- React + Bootstrap
-- Mínimo 2 rutas
-- API pública Dog CEO
-- Pendiente según el grupo: LocalStorage si aplica, documentación de entrega
 
-## Entrega
-
-Pre-entrega: 1 de junio de 2026. Prórroga posible: 15 de junio.
-
-## Primer commit
-
-Incluir: `frontend/`, `docker-compose.yml`, `.env.example`, `.gitignore`, `README.md`.
-
-No incluir: `.env`, `node_modules/`, `frontend/dist/`.
