@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Alert, Button, Card, Col, Form, Row, Spinner } from 'react-bootstrap'
+import { Alert, Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstrap'
+import { useSearchParams } from 'react-router-dom'
 import {
   fetchBreeds,
   fetchRandomImageByBreed,
@@ -8,6 +9,7 @@ import {
 } from '../services/api'
 
 export function BreedsPage() {
+  const [searchParams] = useSearchParams()
   const [breeds, setBreeds] = useState<BreedOption[]>([])
   const [selectedBreed, setSelectedBreed] = useState('')
   const [image, setImage] = useState<string | null>(null)
@@ -17,17 +19,25 @@ export function BreedsPage() {
 
   useEffect(() => {
     let cancelled = false
+    const breedParam = searchParams.get('breed')
 
     fetchBreeds()
       .then((data) => {
         if (cancelled) return
-        setBreeds(data)
-        const firstBreed = data[0]?.value ?? ''
-        setSelectedBreed(firstBreed)
 
-        if (!firstBreed) return
+        setBreeds(data)
+
+        const initialBreed =
+          breedParam && data.some((breed) => breed.value === breedParam)
+            ? breedParam
+            : data[0]?.value ?? ''
+
+        setSelectedBreed(initialBreed)
+
+        if (!initialBreed) return
+
         setLoadingImage(true)
-        return fetchRandomImageByBreed(firstBreed).then((firstImage) => {
+        return fetchRandomImageByBreed(initialBreed).then((firstImage) => {
           if (!cancelled) setImage(firstImage)
         })
       })
@@ -44,7 +54,7 @@ export function BreedsPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [searchParams])
 
   function loadBreedImage(breedValue = selectedBreed) {
     if (!breedValue) return
@@ -64,7 +74,7 @@ export function BreedsPage() {
   }
 
   return (
-    <>
+    <Container className="py-5">
       <div className="section-heading">
         <span>Dog API</span>
         <h1>Ver razas</h1>
@@ -122,6 +132,6 @@ export function BreedsPage() {
           </Card>
         </Col>
       </Row>
-    </>
+    </Container>
   )
 }

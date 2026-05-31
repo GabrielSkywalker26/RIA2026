@@ -1,8 +1,8 @@
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Container, Row } from 'react-bootstrap'
 
 export function AboutUsPage() {
   return (
-    <>
+    <Container className="py-5">
       <div className="section-heading">
         <span>BuscaPerros</span>
         <h1>Sobre nosotros</h1>
@@ -49,6 +49,6 @@ export function AboutUsPage() {
           </Card>
         </Col>
       </Row>
-    </>
+    </Container>
   )
 }

@@ -51,3 +51,33 @@ export async function fetchRandomImageByBreed(breedValue: string) {
   const data = await httpClient<DogApiResponse<string>>(path)
   return data.message
 }
+
+export type BreedCard = {
+  value: string
+  label: string
+  image: string
+}
+
+function shuffleBreeds<T>(items: T[]) {
+  const copy = [...items]
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1))
+    ;[copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]]
+  }
+  return copy
+}
+
+export async function fetchRandomBreedCards(count: number, excludeValues: string[] = []) {
+  const breeds = await fetchBreeds()
+  const excluded = new Set(excludeValues)
+  const available = breeds.filter((breed) => !excluded.has(breed.value))
+  const picked = shuffleBreeds(available).slice(0, count)
+
+  return Promise.all(
+    picked.map(async (breed) => ({
+      value: breed.value,
+      label: breed.label,
+      image: await fetchRandomImageByBreed(breed.value),
+    })),
+  )
+}

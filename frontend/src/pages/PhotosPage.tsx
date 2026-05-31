@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Button, Card, Col, Modal, Row, Spinner } from 'react-bootstrap'
+import { Alert, Button, Card, Col, Container, Modal, Row, Spinner } from 'react-bootstrap'
 import { fetchRandomDogImages } from '../services/api'
 
 export function PhotosPage() {
@@ -39,7 +39,7 @@ export function PhotosPage() {
   }, [])
 
   return (
-    <>
+    <Container className="py-5">
       <div className="section-heading">
         <span>Dog API</span>
         <h1>Fotos random</h1>
@@ -110,6 +110,6 @@ export function PhotosPage() {
           )}
         </Modal.Footer>
       </Modal>
-    </>
+    </Container>
   )
 }
