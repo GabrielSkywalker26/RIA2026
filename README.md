@@ -31,17 +31,17 @@ En cumplimiento con los requerimientos de la letra, se detallan las herramientas
 
 Para garantizar el cumplimiento de los estándares de una aplicación RIA profesional, el proyecto implementa una estrategia de pruebas en múltiples niveles y una auditoría estricta de rendimiento:
 
-### 🔹 Pruebas Unitarias (Unit Tests)
+### Pruebas Unitarias (Unit Tests)
 * **Objetivo:** Verificar el correcto funcionamiento de los componentes de React aislados y las funciones de utilidad de forma individual.
 * **Herramientas:** [Jest / Vitest]* junto con **React Testing Library**.
 * **Alcance:** Pruebas sobre el renderizado correcto de componentes, manejo de estados internos y eventos básicos (clicks, cambios en inputs).
 
-### 🔹 Pruebas de Integración (Integration Tests)
+### Pruebas de Integración (Integration Tests)
 * **Objetivo:** Validar la interacción fluida entre múltiples componentes, el flujo de navegación entre las distintas rutas y el comportamiento de la app al consumir las APIs simuladas (mocked).
 * **Herramientas:** Playwright.
 * **Alcance:** Simulación de flujos de usuario completos (ej: buscar una raza de perro, esperar la respuesta de la API, renderizar la imagen y navegar a la sección de detalles).
 
-### ⚡ Auditoría de Rendimiento y UX (Lighthouse > 80)
+### Auditoría de Rendimiento y UX (Lighthouse > 80)
 La aplicación fue optimizada siguiendo las buenas prácticas de desarrollo web para superar un **puntaje mayor a 80** en todas las métricas clave de Google Lighthouse:
 
 * **Performance (Rendimiento):** Optimización de carga de imágenes externas de perros (uso de atributos de tamaño adaptables y carga perezosa o *lazy loading*).
