@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link, Outlet } from 'react-router-dom'
 import { Navbar } from './Navbar'
@@ -7,7 +8,9 @@ export function AppLayout() {
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
       <main className="flex-grow-1">
-        <Outlet />
+        <Suspense fallback={<div className="page-loading" aria-live="polite" aria-busy="true" />}>
+          <Outlet />
+        </Suspense>
       </main>
       <footer className="site-footer">
         <Container>

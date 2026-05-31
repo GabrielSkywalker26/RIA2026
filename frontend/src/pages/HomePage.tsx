@@ -15,6 +15,20 @@ import {
   type BreedCard,
 } from '../services/api'
 
+function scheduleNonCriticalWork(task: () => void) {
+  if (import.meta.env.MODE === 'test') {
+    task()
+    return
+  }
+
+  if (typeof globalThis.requestIdleCallback === 'function') {
+    globalThis.requestIdleCallback(() => task())
+    return
+  }
+
+  globalThis.setTimeout(task, 1)
+}
+
 const BREEDS_PER_PAGE = 4
 const BREED_SLIDER_PAGES = 3
 const BREED_SLIDER_TOTAL = 12
@@ -95,25 +109,31 @@ export function HomePage() {
   useEffect(() => {
     let cancelled = false
 
-    loadBreedBatch(0)
-      .catch((error) => {
-        if (!cancelled) {
-          loadedBreedBatchesRef.current.delete(0)
-          setBreedSliderError(
-            error instanceof Error ? error.message : 'Error al cargar razas destacadas',
-          )
-        }
-      })
+    scheduleNonCriticalWork(() => {
+      loadBreedBatch(0)
+        .catch((error) => {
+          if (!cancelled) {
+            loadedBreedBatchesRef.current.delete(0)
+            setBreedSliderError(
+              error instanceof Error ? error.message : 'Error al cargar razas destacadas',
+            )
+          }
+        })
+        .finally(() => {
+          if (cancelled) return
 
-    loadPhotoBatch(0)
-      .catch((error) => {
-        if (!cancelled) {
-          loadedPhotoBatchesRef.current.delete(0)
-          setPhotoSliderError(
-            error instanceof Error ? error.message : 'Error al cargar fotos random',
-          )
-        }
-      })
+          scheduleNonCriticalWork(() => {
+            loadPhotoBatch(0).catch((error) => {
+              if (!cancelled) {
+                loadedPhotoBatchesRef.current.delete(0)
+                setPhotoSliderError(
+                  error instanceof Error ? error.message : 'Error al cargar fotos random',
+                )
+              }
+            })
+          })
+        })
+    })
 
     return () => {
       cancelled = true
@@ -198,7 +218,15 @@ export function HomePage() {
               </Col>
               <Col lg={6} className="hero-visual-col">
                 <div className="hero-visual" aria-hidden="true">
-                  <img className="hero-composite" src={cabezalCompuesto} alt="" />
+                  <img
+                    className="hero-composite"
+                    src={cabezalCompuesto}
+                    alt=""
+                    width={1920}
+                    height={400}
+                    decoding="async"
+                    fetchPriority="high"
+                  />
                 </div>
               </Col>
             </Row>
@@ -338,8 +366,8 @@ export function HomePage() {
             </Col>
             <Col lg={6} className="text-center text-lg-end">
               <div className="promo-visual" aria-hidden="true">
-                <img className="promo-shape" src={heroShape} alt="" />
-                <img className="promo-logo" src={brandLogo} alt="" />
+                <img className="promo-shape" src={heroShape} alt="" loading="lazy" decoding="async" />
+                <img className="promo-logo" src={brandLogo} alt="" loading="lazy" decoding="async" />
               </div>
             </Col>
           </Row>

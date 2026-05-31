@@ -1,4 +1,10 @@
-import { getBreedLabel, fetchBreeds, fetchRandomDogImages, fetchRandomImageByBreed } from '../api'
+import {
+  getBreedLabel,
+  fetchBreeds,
+  fetchRandomDogImages,
+  fetchRandomImageByBreed,
+  resetBreedsCache,
+} from '../api'
 import { httpClient } from '../httpClient'
 
 vi.mock('../httpClient')
@@ -20,6 +26,10 @@ describe('getBreedLabel', () => {
 })
 
 describe('fetchBreeds', () => {
+  beforeEach(() => {
+    resetBreedsCache()
+  })
+
   it('returns sorted breed options', async () => {
     mockedHttpClient.mockResolvedValueOnce({
       message: {
@@ -31,6 +41,7 @@ describe('fetchBreeds', () => {
     })
 
     const breeds = await fetchBreeds()
+    const breedsAgain = await fetchBreeds()
 
     expect(breeds).toEqual([
       { value: 'hound/afghan', label: 'Afghan Hound' },
@@ -39,6 +50,8 @@ describe('fetchBreeds', () => {
       { value: 'retriever/labrador', label: 'Labrador Retriever' },
       { value: 'pug', label: 'Pug' },
     ])
+    expect(breedsAgain).toEqual(breeds)
+    expect(httpClient).toHaveBeenCalledTimes(1)
   })
 
   it('handles empty sub-breeds', async () => {
@@ -51,6 +64,7 @@ describe('fetchBreeds', () => {
     expect(breeds).toHaveLength(1)
     expect(breeds[0]).toEqual({ value: 'pug', label: 'Pug' })
   })
+
 })
 
 describe('fetchRandomDogImages', () => {

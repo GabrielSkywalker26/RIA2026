@@ -26,21 +26,40 @@ export async function fetchRandomDogImages(count = 6) {
   return data.message
 }
 
+let breedsCache: BreedOption[] | null = null
+let breedsRequest: Promise<BreedOption[]> | null = null
+
+export function resetBreedsCache() {
+  breedsCache = null
+  breedsRequest = null
+}
+
 export async function fetchBreeds() {
-  const data = await httpClient<DogApiResponse<Record<string, string[]>>>('/breeds/list/all')
+  if (breedsCache) return breedsCache
+  if (breedsRequest) return breedsRequest
 
-  return Object.entries(data.message)
-    .flatMap(([breed, subBreeds]) => {
-      if (subBreeds.length === 0) {
-        return [{ value: breed, label: formatBreedName(breed) }]
-      }
+  breedsRequest = httpClient<DogApiResponse<Record<string, string[]>>>('/breeds/list/all')
+    .then((data) => {
+      breedsCache = Object.entries(data.message)
+        .flatMap(([breed, subBreeds]) => {
+          if (subBreeds.length === 0) {
+            return [{ value: breed, label: formatBreedName(breed) }]
+          }
 
-      return subBreeds.map((subBreed) => ({
-        value: `${breed}/${subBreed}`,
-        label: `${formatBreedName(subBreed)} ${formatBreedName(breed)}`,
-      }))
+          return subBreeds.map((subBreed) => ({
+            value: `${breed}/${subBreed}`,
+            label: `${formatBreedName(subBreed)} ${formatBreedName(breed)}`,
+          }))
+        })
+        .sort((a, b) => a.label.localeCompare(b.label))
+
+      return breedsCache
     })
-    .sort((a, b) => a.label.localeCompare(b.label))
+    .finally(() => {
+      breedsRequest = null
+    })
+
+  return breedsRequest
 }
 
 export async function fetchRandomImageByBreed(breedValue: string) {

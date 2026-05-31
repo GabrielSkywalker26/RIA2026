@@ -1,13 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { StrictMode } from 'react'
+import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { AppLayout } from './components/layout/AppLayout'
-import './index.css'
-import { AboutUsPage } from './pages/AboutUsPage'
-import { BreedsPage } from './pages/BreedsPage'
 import { HomePage } from './pages/HomePage'
-import { PhotosPage } from './pages/PhotosPage'
+import './index.css'
+
+const PhotosPage = lazy(() =>
+  import('./pages/PhotosPage').then((module) => ({ default: module.PhotosPage })),
+)
+const BreedsPage = lazy(() =>
+  import('./pages/BreedsPage').then((module) => ({ default: module.BreedsPage })),
+)
+const AboutUsPage = lazy(() =>
+  import('./pages/AboutUsPage').then((module) => ({ default: module.AboutUsPage })),
+)
 
 const router = createBrowserRouter([
   {
@@ -24,6 +31,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Suspense fallback={null}>
+      <RouterProvider router={router} />
+    </Suspense>
   </StrictMode>,
 )

@@ -33,29 +33,30 @@ export function BreedSearch() {
   const [query, setQuery] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [loadError, setLoadError] = useState(false)
 
   const results = useMemo(() => filterBreeds(breedCatalog, query), [breedCatalog, query])
+  const catalogRequestedRef = useRef(false)
 
-  useEffect(() => {
-    let cancelled = false
+  function ensureCatalogLoaded() {
+    if (catalogRequestedRef.current || breedCatalog.length > 0) return
+
+    catalogRequestedRef.current = true
+    setLoading(true)
 
     fetchBreeds()
       .then((breeds) => {
-        if (!cancelled) setBreedCatalog(breeds)
+        setBreedCatalog(breeds)
       })
       .catch(() => {
-        if (!cancelled) setLoadError(true)
+        catalogRequestedRef.current = false
+        setLoadError(true)
       })
       .finally(() => {
-        if (!cancelled) setLoading(false)
+        setLoading(false)
       })
-
-    return () => {
-      cancelled = true
-    }
-  }, [])
+  }
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -138,11 +139,13 @@ export function BreedSearch() {
             aria-controls={listboxId}
             aria-expanded={isOpen && results.length > 0}
             onChange={(event) => {
+              ensureCatalogLoaded()
               setQuery(event.target.value)
               setIsOpen(true)
               setActiveIndex(-1)
             }}
             onFocus={() => {
+              ensureCatalogLoaded()
               if (query.trim()) setIsOpen(true)
             }}
             onKeyDown={handleKeyDown}

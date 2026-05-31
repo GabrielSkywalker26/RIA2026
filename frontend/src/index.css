@@ -10,11 +10,15 @@ body {
   margin: 0;
   background: var(--surface-muted);
   color: #121212;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+.page-loading {
+  min-height: 12rem;
 }
 
 .top-strip {
@@ -239,7 +243,8 @@ a {
 
 .hero-section {
   background: var(--surface-muted);
-  padding: 2rem 0 0;
+  overflow: hidden;
+  padding: 0 2rem;
   position: relative;
   z-index: 2;
 }
@@ -332,8 +337,8 @@ a {
   display: flex;
   justify-content: center;
   line-height: 0;
-  margin-bottom: -2.5rem;
-  overflow: visible;
+  margin-bottom: 0;
+  overflow: hidden;
   position: relative;
 }
 
@@ -341,7 +346,7 @@ a {
   display: block;
   height: auto;
   margin: 0 auto;
-  max-width: min(100%, 560px);
+  max-width: 100%;
   object-fit: contain;
   object-position: bottom center;
   width: 100%;
@@ -837,11 +842,7 @@ a {
   }
 
   .hero-section {
-    padding-top: 1rem;
-  }
-
-  .hero-visual {
-    margin-bottom: -1.5rem;
+    padding: 1rem 0;
   }
 
   .breeds-floor {
