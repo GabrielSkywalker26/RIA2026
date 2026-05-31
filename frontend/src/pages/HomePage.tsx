@@ -176,7 +176,7 @@ export function HomePage() {
         <section className="hero-section">
           <Container>
             <Row className="align-items-center g-4 g-lg-5">
-              <Col lg={6}>
+              <Col lg={6} className="pb-4">
                 <span className="eyebrow">Dog API</span>
                 <h1>
                   Encontrá las mejores
