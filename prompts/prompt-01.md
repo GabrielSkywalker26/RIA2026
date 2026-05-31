@@ -1,3 +1,5 @@
-# Prompt 1: fetch a Dog CEO
+# Prompt 1
 
-No puedo integrar la API Dog CEO. Me traba el fetch, cómo hago para traer las razas y mostrarlas?
+**Usuario:** No puedo integrar la API Dog CEO. Me traba el fetch, cómo hago para traer las razas y mostrarlas?
+
+**Respuesta:** Se creó un httpClient genérico con fetch tipado y funciones específicas en `api.ts` para obtener razas, fotos aleatorias e imágenes por raza desde `https://dog.ceo/api`.
