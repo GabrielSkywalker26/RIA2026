@@ -82,10 +82,21 @@ body {
 }
 
 .brand-button {
+  --bs-btn-active-bg: #050505;
+  --bs-btn-active-border-color: #050505;
+  --bs-btn-active-color: #fff;
+  --bs-btn-bg: #050505;
+  --bs-btn-border-color: #050505;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: #f47f20;
+  --bs-btn-hover-border-color: #f47f20;
+  --bs-btn-hover-color: #111;
   background: #050505;
   border-color: #050505;
   border-radius: 8px;
+  color: #fff;
   font-weight: 800;
+  opacity: 1;
   padding: 0.8rem 1.4rem;
 }
 
@@ -93,6 +104,8 @@ body {
 .brand-button:focus {
   background: #f47f20;
   border-color: #f47f20;
+  color: #111;
+  opacity: 1;
 }
 
 .hero-visual {
@@ -155,6 +168,50 @@ body {
   object-fit: cover;
 }
 
+.photo-preview {
+  background: transparent;
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  cursor: zoom-in;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  text-align: inherit;
+  width: 100%;
+}
+
+.photo-preview:focus-visible {
+  outline: 3px solid #f47f20;
+  outline-offset: 4px;
+}
+
+.photo-preview img {
+  transition: transform 180ms ease;
+  width: 100%;
+}
+
+.photo-preview:hover img {
+  transform: scale(1.03);
+}
+
+.photo-modal .modal-content {
+  border: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.photo-modal .modal-body {
+  background: #111;
+  padding: 0;
+}
+
+.photo-modal .modal-body img {
+  display: block;
+  max-height: 72vh;
+  object-fit: contain;
+  width: 100%;
+}
+
 .featured-dog-card {
   overflow: hidden;
 }
@@ -174,6 +231,22 @@ body {
   font-weight: 800;
   margin-bottom: 0.75rem;
   padding: 0.35rem 0.75rem;
+}
+
+.dog-tag-button {
+  border: 0;
+  cursor: zoom-in;
+}
+
+.dog-tag-button:hover,
+.dog-tag-button:focus {
+  background: #f47f20;
+  color: #111;
+}
+
+.dog-tag-button:focus-visible {
+  outline: 3px solid #f47f20;
+  outline-offset: 4px;
 }
 
 .section-heading {
