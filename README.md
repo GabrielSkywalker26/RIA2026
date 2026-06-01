@@ -1,4 +1,4 @@
-# Trabajo Práctico: Aplicación RIA (BuscarPerros)
+# Trabajo Práctico: Aplicación RIA (BuscaPerros)
 
 ## 1. Objetivo y Alcance
 El objetivo de este proyecto es desarrollar una aplicación web funcional del tipo RIA (Rich Internet Application) denominada **BuscarPerros** utilizando **React** para el consumo asíncrono de APIs públicas. Se aplica un ciclo de desarrollo profesional que abarca desde la concepción del diseño visual (Mockups de alta fidelidad) hasta la documentación, testing automatizado, contenerización y optimización de rendimiento.
