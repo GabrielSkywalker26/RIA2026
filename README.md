@@ -66,7 +66,15 @@ El proyecto está completamente contenerizado para aislar el entorno de ejecuci�
 
 ---
 
-## 6. Paso a Paso: Cómo Levantar el Sistema
+## 6. Uso de Herramientas de Inteligencia Artificial (IA Generativa)
+En consonancia con las metodologías modernas de desarrollo de software, se integraron herramientas de IA generativa como asistentes de ingeniería durante fases clave del proyecto, potenciando la productividad y la optimización del código:
+
+* **Gemini:** Utilizado como consultor arquitectónico y técnico. Asistió en el diseño conceptual de la estructura de componentes, la validación de las restricciones de la letra (diseño sin backend propio), la creación de la documentación técnica y la planificación de las estrategias de optimización para Lighthouse.
+* **Cursor:** Empleado como entorno de desarrollo integrado (IDE) potenciado por IA. Permitió agilizar la escritura del código de los componentes de React, automatizar tareas repetitivas de maquetado con Bootstrap y acelerar la configuración inicial de los archivos de testing y Docker.
+
+---
+
+## 7. Paso a Paso: Cómo Levantar el Sistema
 
 Para construir y ejecutar esta aplicación en cualquier computadora sin necesidad de instalar dependencias locales, seguí estos pasos:
 
@@ -77,3 +85,4 @@ Tener instalado **Docker** en el sistema operativo.
 1. **Clonar el repositorio:**
    ```bash
    docker compose up -d
+   ---
