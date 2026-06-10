@@ -87,7 +87,6 @@ Tener instalado **Docker** en el sistema operativo.
    docker compose up -d
    cd frontend
    npm install
-   ---
    ```
 
 ## 8. Integrantes
