@@ -91,5 +91,5 @@ Tener instalado **Docker** en el sistema operativo.
 
 ## 8. Integrantes
 
-Gabriel Fiumarelli
-Pablo Morales
+* Gabriel Fiumarelli
+* Pablo Morales
