@@ -82,7 +82,15 @@ Para construir y ejecutar esta aplicación en cualquier computadora sin necesida
 Tener instalado **Docker** en el sistema operativo.
 
 ### Pasos para la ejecución:
-1. **Clonar el repositorio:**
+**Clonar el repositorio:**
    ```bash
    docker compose up -d
+   cd frontend
+   npm install
    ---
+   ```
+
+## 8. Integrantes
+
+Gabriel Fiumarelli
+Pablo Morales
